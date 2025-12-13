@@ -1,0 +1,12 @@
+lightning
+chromadb
+rank_bm25
+sentence-transformers
+ollama
+sqlalchemy
+ipython
+pandas
+langchain
+langchain-community
+agentlightning
+streamlit
