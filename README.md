@@ -1,18 +1,30 @@
 # ⚡ EvoSQL-Lightning
 
-**EvoSQL-Lightning** is a robust, modular Natural Language to SQL (NL2SQL) system.
+**EvoSQL-Lightning** is a modular, high-performance system that turns **Natural Language into SQL** (NL2SQL). Designed for the **Hybrid Cloud**, it combines the accessibility of a Cloud UI with the privacy and power of **Local LLMs** (like Llama 3) running on your own hardware.
+
+It is not just a translator; it is an **Agentic System** that audits, explains, and improves itself.
 
 ## 🚀 Key Features
 
-- **Hybrid Cloud Architecture**:
-  - **UI**: Runs on Streamlit Cloud (accessible from anywhere).
-  - **Brain**: Runs on **YOUR** hardware (Local Ollama) via a secure tunnel, or uses OpenAI.
-- **SLM-First**: Optimized for **Llama 3**, **Mistral**, **Phi-3**.
-- **Robust Intelligence**:
-  - **Auto-Explanation**: Catches silent errors by explaining logic in plain English.
-  - **Safe Execution**: Sandboxed environment prevents destructive queries (`DROP`, `DELETE`).
-  - **Auto-Auditor**: AI Critic automatically audits queries and labels data.
-- **Self-Improving Loop**: Collects feedback to build a fine-tuning dataset (even from the cloud).
+### 🛡️ Secure by Design
+
+- **Safety Sandbox:** Never worry about an accidental `DROP TABLE` or `DELETE FROM users`. The executor identifies and blocks destructive queries before they touch your database.
+- **Privacy First:** Your data schema and queries stay on your machine (when using Local Ollama).
+
+### 🧠 Robust Intelligence
+
+- **Auto-Explanation:** The model doesn't just run code; it explains _why_. It translates the generated SQL back into plain English (e.g., _"I am calculating the average revenue per user filtered by active status"_), helping you catch silent logic errors.
+- **Auto-Auditor (AI Critic):** A secondary "Judge" model reviews every interaction. It scores the SQL quality and flags hallucinations, creating a reliable feedback loop.
+
+### 🔄 Self-Improving System
+
+- **Active Learning:** Every "Thumbs Up" 👍 you give isn't just a metric; it's saved to a **Golden Dataset**.
+- **Fine-Tuning Loop:** Use this dataset to fine-tune your local SLM (e.g., using Unsloth/MLX), making the model smarter about _your_ specific schema over time.
+
+### ☁️ Cloud Ready, Locally Powered
+
+- **Hybrid Architecture:** Deploy the beautiful Streamlit UI to the cloud for free.
+- **Infinite Inference:** Connect it via **Ngrok** to your local GPU. Zero API costs, infinite tokens, and full data control.
 
 ## 🛠️ Deployment (Streamlit Cloud)
 
