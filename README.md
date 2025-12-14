@@ -64,9 +64,9 @@ python3 verify_setup.py
 ```mermaid
 graph TD
     User[User / UI] --> Executor[Executor SQLAgent]
-    Executor <--> Store[Semantic Store (ChromaDB)]
-    Executor --> Ollama[Local SLM (Ollama)]
-    Executor --> DB[(Target Database)]
+    Executor <--> Store[Semantic Store ChromaDB]
+    Executor --> Ollama[Local SLM Ollama]
+    Executor --> DB[Target Database]
 
     Explorer[Explorer (SchemaDiscovery)] -->|Introspect| DB
     Explorer -->|Populate| Store
