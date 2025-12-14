@@ -1,6 +1,6 @@
 # ⚡ EvoSQL-Lightning
 
-**EvoSQL-Lightning** is a modular, high-performance system that turns **Natural Language into SQL** (NL2SQL). Designed for the **Hybrid Cloud**, it combines the accessibility of a Cloud UI with the privacy and power of **Local LLMs** (like Llama 3) running on your own hardware.
+**EvoSQL-Lightning** is a modular, high-performance system that turns **Natural Language into SQL** (NL2SQL). 
 
 It is not just a translator; it is an **Agentic System** that audits, explains, and improves itself.
 
@@ -21,24 +21,7 @@ It is not just a translator; it is an **Agentic System** that audits, explains, 
 - **Active Learning:** Every "Thumbs Up" 👍 you give isn't just a metric; it's saved to a **Golden Dataset**.
 - **Fine-Tuning Loop:** Use this dataset to fine-tune your local SLM (e.g., using Unsloth/MLX), making the model smarter about _your_ specific schema over time.
 
-### ☁️ Cloud Ready, Locally Powered
 
-- **Hybrid Architecture:** Deploy the beautiful Streamlit UI to the cloud for free.
-- **Infinite Inference:** Connect it via **Ngrok** to your local GPU. Zero API costs, infinite tokens, and full data control.
-
-## 🛠️ Deployment (Streamlit Cloud)
-
-This app is "Cloud Ready". You can deploy it for free on Streamlit Community Cloud.
-
-### 1. Push to GitHub
-
-Fork this repository and push it to your GitHub account.
-
-### 2. Deploy
-
-1. Go to [share.streamlit.io](https://share.streamlit.io).
-2. Select this repository and the file `src/components/ui.py`.
-3. Click **Deploy**.
 
 ### 3. Configure Intelligence (Secrets)
 
@@ -82,7 +65,7 @@ graph TD
 
 ## 🏃‍♂️ Local Usage
 
-You can still run it entirely locally:
+Run it locally:
 
 ```bash
 # Setup
