@@ -1,65 +1,58 @@
 # ⚡ EvoSQL-Lightning
 
-**EvoSQL-Lightning** is a robust, modular Natural Language to SQL (NL2SQL) system built on **Lightning AI** and **Small Language Models (SLMs)**. It prioritizes low latency, data privacy, and self-improvement through user feedback.
+**EvoSQL-Lightning** is a robust, modular Natural Language to SQL (NL2SQL) system.
 
 ## 🚀 Key Features
 
-- **Modular Architecture**: Built with `LightningWork` components for scalability (`Explorer`, `Executor`, `Trainer`).
-- **SLM-First**: Optimized for **Ollama** (Llama 3, Mistral, Phi-3), running locally on your machine.
+- **Hybrid Cloud Architecture**:
+  - **UI**: Runs on Streamlit Cloud (accessible from anywhere).
+  - **Brain**: Runs on **YOUR** hardware (Local Ollama) via a secure tunnel, or uses OpenAI.
+- **SLM-First**: Optimized for **Llama 3**, **Mistral**, **Phi-3**.
 - **Robust Intelligence**:
-  - **Auto-Explanation**: The system explains its SQL logic in plain English to catch silent errors.
-  - **Graph Awareness**: Indexes Foreign Keys and Join Hints to handle complex relationships.
-  - **Safe Execution**: Sandboxed execution preventing destructive queries (`DROP`, `DELETE`).
-  - **Active Ambiguity**: Asks for clarification when column names are confusing.
-  - **Auto-Auditor**: AI Critic that evaluates query quality and automatically labels data.
-  - **Chain-of-Thought (CoT)**: Auditor uses reasoning steps before verdict to ensure SLM accuracy.
-- **Self-Improving Loop**: Collects "Thumbs Up/Down" feedback to build a dataset for DPO/Fine-tuning.
-- **Regression Testing**: Validates model updates against a Golden Dataset before acceptance.
+  - **Auto-Explanation**: Catches silent errors by explaining logic in plain English.
+  - **Safe Execution**: Sandboxed environment prevents destructive queries (`DROP`, `DELETE`).
+  - **Auto-Auditor**: AI Critic automatically audits queries and labels data.
+- **Self-Improving Loop**: Collects feedback to build a fine-tuning dataset (even from the cloud).
 
-## 🛠️ Installation
+## 🛠️ Deployment (Streamlit Cloud)
 
-### Prerequisites
+This app is "Cloud Ready". You can deploy it for free on Streamlit Community Cloud.
 
-1.  **Python 3.9+**
-2.  **Ollama**: [Download and install](https://ollama.com).
-3.  **Pull a Model**:
-    ```bash
-    ollama pull llama3:8b
-    ```
+### 1. Push to GitHub
 
-### Setup
+Fork this repository and push it to your GitHub account.
 
-1.  Clone the repository.
-2.  Install dependencies:
-    ```bash
-    pip install -r requirements.txt
-    ```
+### 2. Deploy
 
-## 🏃‍♂️ Usage
+1. Go to [share.streamlit.io](https://share.streamlit.io).
+2. Select this repository and the file `src/components/ui.py`.
+3. Click **Deploy**.
 
-### 1. Interactive Chat UI (Streamlit)
+### 3. Configure Intelligence (Secrets)
 
-The best way to use the system is via the Dashboard.
+The app needs a "Brain". You have two options:
 
-```bash
-./.venv/bin/python -m streamlit run src/components/ui.py
-# OR if your venv is active:
-# streamlit run src/components/ui.py
-```
+#### Option A: Free & Private (Local Ollama) 🏠
 
-- **Ask**: "Show me users in Madrid"
-- **Verify**: Check the generic SQL + Explanation.
-- **Feedback**: Click 👍 or 👎 to save data for training.
+Use your own GPU/CPU to power the cloud app.
 
-### 2. Verify Backend only
+1. Run Ollama locally: `ollama run llama3:8b`
+2. Expose it via Ngrok: `ngrok http 11434`
+3. In Streamlit Cloud Settings > **Secrets**:
+   ```toml
+   OLLAMA_BASE_URL = "https://your-ngrok-url.ngrok-free.app"
+   ```
 
-Run the verification script to simulate a CLI flow.
+#### Option B: Convenience (OpenAI) ☁️
 
-```bash
-python3 verify_setup.py
-```
+Use GPT-4o or GPT-3.5.
 
-## 🏗️ Architecture
+1. In Streamlit Cloud Settings > **Secrets**:
+   ```toml
+   OPENAI_API_KEY = "sk-..."
+   ```
+
+## 🏗️ Architecture (Hybrid)
 
 ```mermaid
 graph TD
@@ -75,19 +68,21 @@ graph TD
     Trainer -->|Fine-tune| Ollama
 ```
 
-## 🧠 Components
+## 🏃‍♂️ Local Usage
 
-- **`src/components/explorer.py`**: Scans DB schema, profiles data, creates embeddings.
-- **`src/components/executor.py`**: Handles queries, RAG retrieval, ambiguity checks, generation.
-- **`src/components/trainer.py`**: Manages the feedback loop and regression testing.
-- **`src/components/ui.py`**: Streamlit frontend.
+You can still run it entirely locally:
 
-## 📈 Training (Self-Improvement)
+```bash
+# Setup
+pip install -r requirements.txt
 
-The system saves feedback to `training_data.jsonl`.
-To fine-tune your model:
+# Run
+./.venv/bin/python -m streamlit run src/components/ui.py
+```
 
-1.  Collect ~50+ good examples via the UI.
-2.  Use **MLX** (Mac) or **Unsloth** (Linux/Windows) to fine-tune `llama3:8b` on `training_data.jsonl`.
-3.  Export the new model to Ollama (`ollama create my-sql-v2 ...`).
-4.  Update `SQLAgent` to use `my-sql-v2`.
+## 📈 Self-Improvement
+
+The system collects "Gold Standard" examples based on your feedback.
+
+- **On Cloud**: Data helps you verify logic, but files are ephemeral (reset on reboot).
+- **On Local**: Data is saved to `training_data.jsonl`, which you can use to **Fine-Tune** your local Llama 3 model using generic tools like **Unsloth** or **MLX**.
