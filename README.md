@@ -68,7 +68,7 @@ graph TD
     Executor --> Ollama[Local SLM Ollama]
     Executor --> DB[Target Database]
 
-    Explorer[Explorer (SchemaDiscovery)] -->|Introspect| DB
+    Explorer[Explorer SchemaDiscovery] -->|Introspect| DB
     Explorer -->|Populate| Store
 
     User -->|Feedback| Trainer[Trainer (SelfImprover)]
