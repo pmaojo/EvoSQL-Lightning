@@ -71,7 +71,7 @@ graph TD
     Explorer[Explorer SchemaDiscovery] -->|Introspect| DB
     Explorer -->|Populate| Store
 
-    User -->|Feedback| Trainer[Trainer (SelfImprover)]
+    User -->|Feedback| Trainer[Trainer SelfImprover]
     Trainer -->|Fine-tune| Ollama
 ```
 
